@@ -144,9 +144,7 @@ func ProcessBookmark(deps model.Dependencies, req ProcessRequest) (book model.Bo
 		ebookPath := model.GetEbookPath(&book)
 		req.Bookmark = book
 
-		if strings.Contains(contentType, "application/pdf") {
-			return book, false, errors.Wrap(err, "can't create ebook from pdf")
-		} else {
+		if !strings.Contains(contentType, "application/pdf") {
 			_, err = GenerateEbook(deps, req, ebookPath)
 			if err != nil {
 				return book, true, errors.Wrap(err, "failed to create ebook")
