@@ -323,8 +323,10 @@ func TestProcessBookmark(t *testing.T) {
 					KeepTitle:   true,
 					KeepExcerpt: true,
 				}
-				_, _, err := core.ProcessBookmark(deps, request)
+				result, _, err := core.ProcessBookmark(deps, request)
 				assert.NoError(t, err)
+				assert.True(t, result.HasArchive)
+				assert.False(t, result.HasEbook)
 			})
 		})
 	})
